@@ -63,23 +63,17 @@
       <h3 class="text-2xl font-semibold mb-6">Conseils rapides</h3>
 
       <div class="grid gap-6 md:grid-cols-3">
-        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-start">
-          <span class="text-3xl mb-3">🔒</span>
-          <p class="font-semibold text-lg">Mots de passe forts</p>
-          <p class="text-sm text-gray-600 mt-1">Utilisez des mots de passe uniques et complexes</p>
-        </div>
 
-        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-start">
-          <span class="text-3xl mb-3">🛡️</span>
-          <p class="font-semibold text-lg">Double authentification</p>
-          <p class="text-sm text-gray-600 mt-1">Activez la 2FA sur tous vos comptes importants</p>
+        {{-- faire une boucle --}}
+         @foreach ($conseil as $conseils )
+         <div class="bg-white rounded-lg shadow p-6 flex flex-col items-start">
+          <img src="{{$conseils->image}}" alt="" srcset="" class="h-30 w-full">
+          <p class="font-semibold text-lg">{{$conseils->titre}}</p>
+          <p class="text-sm text-gray-600 mt-1">{{$conseils->sous_titre}}</p>
         </div>
+         @endforeach
+        
 
-        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-start">
-          <span class="text-3xl mb-3">👁️</span>
-          <p class="font-semibold text-lg">Vigilance phishing</p>
-          <p class="text-sm text-gray-600 mt-1">Vérifiez toujours l'expéditeur de vos emails</p>
-        </div>
       </div>
     </section>
 
@@ -91,17 +85,28 @@
       </div>
 
       <div class="space-y-4">
-        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded">
-          <p class="font-semibold text-lg">Nouvelle campagne de phishing par email</p>
-          <p class="text-sm mt-1">Des emails frauduleux se font passer pour des banques populaires</p>
-          <p class="text-xs mt-2 text-gray-600">Il y a 2 heures</p>
-        </div>
 
-        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-6 rounded">
-          <p class="font-semibold text-lg">Mise à jour de sécurité critique</p>
-          <p class="text-sm mt-1">Windows et macOS ont publié des correctifs importants</p>
-          <p class="text-xs mt-2 text-gray-600">Il y a 1 jour</p>
+         {{-- faire une boucle  --}}
+   
+
+         @foreach ( $alerte as  $alertes)
+          @php
+              if ($alertes->status === 'faible') {
+                  $colors = 'bg-blue-100 p-6 rounded border-l-4 border-blue-500 text-blue-700 p-6 rounded';
+              } elseif ($alertes->status === 'modéré') {
+                  $colors = 'bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-6 rounded';
+              } else { // critique ou par défaut
+                  $colors = 'bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded';
+              }
+          @endphp
+         <div class="{{$colors}}">
+          <p class="font-semibold text-lg">{{$alertes->titre}}</p>
+          <p class="text-sm mt-1">{{$alertes->sous_titre}}</p>
+          <p class="text-xs mt-2 text-gray-600">{{$alertes->created_at}}</p>
         </div>
+         @endforeach
+        
+
       </div>
     </section>
     
