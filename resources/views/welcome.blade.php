@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GBcyber</title>
+  <title>🛡 GBcyber</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white font-Poppins">
 
   <!-- Navbar -->
-  <header class="bg-blue-950 text-white">
+  <header class="bg-blue-950 text-white relative z-50">
     <div class="max-w-8xl mx-auto flex justify-between items-center px-6 py-4">
       
       <!-- Logo -->
       <img src="{{ asset('logo.png') }}" alt="Logo GBcyber" class="h-20">
   
-      <!-- Navigation -->
+      <!-- Navigation desktop -->
       <nav class="hidden md:flex gap-6 text-sm">
         <a href="#" class="hover:text-blue-400">Accueil</a>
         <a href="#" class="hover:text-blue-400">Bonnes pratiques</a>
@@ -24,9 +24,30 @@
         <a href="#" class="hover:text-blue-400">Légal & docs</a>
         <a href="#" class="hover:text-blue-400">Nous Contacter</a>
       </nav>
+
+      <!-- Bouton burger mobile -->
+      <button id="burger" class="md:hidden text-white text-3xl focus:outline-none">
+        ☰
+      </button>
     </div>
   </header>
-  
+
+
+  <!-- Overlay + Menu mobile -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <div id="mobileMenu" class="fixed top-0 left-0 w-3/4 max-w-xs h-full bg-blue-950 text-white p-6 transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+    <button id="closeMenu" class="text-white text-2xl mb-6">✕</button>
+    <nav class="flex flex-col gap-4 text-lg">
+      <a href="#" class="flex items-center gap-2 hover:text-blue-400">🏠 Accueil</a>
+      <a href="#" class="flex items-center gap-2 hover:text-blue-400">📚 Bonnes pratiques</a>
+      <a href="#" class="flex items-center gap-2 hover:text-blue-400">🛠️ Outils & Technologie</a>
+      <a href="#" class="flex items-center gap-2 hover:text-blue-400">⚠️ Alertes</a>
+      <a href="#" class="flex items-center gap-2 hover:text-blue-400">📄 Légal & docs</a>
+      <a href="#" class="flex items-center gap-2 hover:text-blue-400">📞 Nous Contacter</a>
+    </nav>
+  </div>
+
 
   <main class="max-w-6xl mx-auto px-4 py-8">
 
@@ -83,8 +104,7 @@
         </div>
       </div>
     </section>
-
-
+    
     <section class="  py-8">
         <h2 class="text-xl font-semibold mb-6">Accès rapide</h2>
       
@@ -118,32 +138,17 @@
               <p class="text-sm text-gray-600">Sécurité pro</p>
             </div>
           </div>
-      
         </div>
       </section>
-      
   </main>
-
-  <!-- Footer mobile -->
-  <nav class="fixed bottom-0 left-0 w-full bg-white shadow flex justify-around py-2 md:hidden">
-    <a href="#" class="text-blue-600 text-sm flex flex-col items-center">🏠<span>Accueil</span></a>
-    <a href="#" class="text-gray-500 text-sm flex flex-col items-center">📚<span>Astuces</span></a>
-    <a href="#" class="text-gray-500 text-sm flex flex-col items-center">🛠️<span>Outils</span></a>
-    <a href="#" class="text-gray-500 text-sm flex flex-col items-center">📄<span>Légal</span></a>
-    <a href="#" class="text-gray-500 text-sm flex flex-col items-center">⚠️<span>Alertes</span></a>
-    <a href="#" class="text-gray-500 text-sm flex flex-col items-center">📞<span>Contact</span></a>
-  </nav>
-
-  {{-- Footer desctop --}}
-
+  <!-- Footer desktop -->
   <footer class="bg-gray-900 text-white">
     <div class="max-w-7xl mx-auto px-6 py-12">
       <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
-        
         <!-- Logo + description -->
         <div class="md:w-1/3">
           <h2 class="text-2xl font-bold mb-2">GB-Cyrber</h2>
-          <p class="text-gray-400">Protégez vos données et apprenez a vous protéger des  menaces grâce à nos conseils  et  solutions avancées de cybersécurité.</p>
+          <p class="text-gray-400">Protégez vos données et apprenez a vous protéger des menaces grâce à nos conseils et solutions avancées de cybersécurité.</p>
         </div>
   
         <!-- Navigation -->
@@ -152,8 +157,7 @@
             <h3 class="text-lg font-semibold mb-2">Services</h3>
             <ul class="space-y-1 text-gray-400">
               <li><a href="#" class="hover:text-blue-400">Sécurité Réseau</a></li>
-              <li><a href="#" class="hover:text-blue-400">Censibilisation</a></li>
-              <li><a href="#" class="hover:text-blue-400"></a></li>
+              <li><a href="#" class="hover:text-blue-400">Sensibilisation</a></li>
             </ul>
           </div>
           <div>
@@ -187,7 +191,6 @@
             </a>
           </div>
         </div>
-  
       </div>
   
       <div class="mt-12 border-t border-gray-800 pt-6 text-center text-gray-500 text-sm">
@@ -195,7 +198,30 @@
       </div>
     </div>
   </footer>
-  
+
+
+  <!-- Script burger -->
+  <script>
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    const overlay = document.getElementById('overlay');
+
+    burger.addEventListener('click', () => {
+      mobileMenu.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      mobileMenu.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+  </script>
 
 </body>
 </html>
