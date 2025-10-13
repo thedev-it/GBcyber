@@ -4,7 +4,7 @@
       <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
         <!-- Logo + description -->
         <div class="md:w-1/3">
-          <h2 class="text-2xl font-bold mb-2">GB-Cyrber</h2>
+          <h2 class="text-2xl font-bold mb-2">GBCyber</h2>
           <p class="text-gray-400">Protégez vos données et apprenez a vous protéger des menaces grâce à nos conseils et solutions avancées de cybersécurité.</p>
         </div>
   
@@ -51,7 +51,7 @@
       </div>
   
       <div class="mt-12 border-t border-gray-800 pt-6 text-center text-gray-500 text-sm">
-        &copy; 2025 GBcyrber by Gilles Brant. Tous droits réservés.
+        &copy; 2025 GBcyber by Gilles Brant. Tous droits réservés.
       </div>
     </div>
   </footer>
