@@ -10,7 +10,7 @@
       <!-- Navigation desktop -->
       <nav class="hidden md:flex gap-6 text-sm">
         <a  href="/" class="hover:text-blue-400">Accueil</a>
-        <a   href="#" class="hover:text-blue-400">Bonnes pratiques</a>
+        <a   href="/bonne-pratiques" class="hover:text-blue-400">Bonnes pratiques</a>
         <a   href="/outils" class="hover:text-blue-400">Outils & Technologie</a>
         <a   href="/alertes" class="hover:text-blue-400">Alertes</a>
         <a  href="#" class="hover:text-blue-400">Légal & docs</a>
