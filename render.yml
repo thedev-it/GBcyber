@@ -3,7 +3,7 @@ services:
     name: gbcyber
     env: docker
     plan: free
-    dockerfilePath: ./dockerfile
+    dockerfilePath: ./Dockerfile
     autoDeploy: true
     envVars:
       - key: APP_ENV
