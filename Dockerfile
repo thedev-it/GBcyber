@@ -1,9 +1,9 @@
 FROM php:8.3-fpm
 
-# Prévenir les prompts interactifs
+# Éviter les prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Installer dépendances système et extensions PHP
+# Installer dépendances système + extensions PHP
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
@@ -28,15 +28,22 @@ WORKDIR /var/www
 # Copier projet
 COPY . .
 
-# Installer dépendances Laravel
+# Installer dépendances Laravel sans dev
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+
+# ⚠️ Générer APP_KEY si pas encore présent
+RUN php artisan key:generate --force || true
+
+# ✅ Mettre en cache la config Laravel (important sur Render)
+RUN php artisan config:clear && php artisan config:cache
 
 # Permissions
 RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage
+    && chmod -R 755 /var/www/storage \
+    && chmod -R 755 /var/www/bootstrap/cache
 
-# Exposer le port (pas obligatoire mais propre)
+# Exposer le port demandé par Render (env $PORT)
 EXPOSE 8000
 
-# ✅ Correction ici : syntaxe shell pour expansion variable $PORT
+# ✅ Commande finale – Render injecte $PORT automatiquement
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
