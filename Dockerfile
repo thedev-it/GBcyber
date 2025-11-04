@@ -28,15 +28,15 @@ WORKDIR /var/www
 # Copier projet
 COPY . .
 
-
 # Installer dépendances Laravel
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
-
 
 # Permissions
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage
 
+# Exposer le port (pas obligatoire mais propre)
 EXPOSE 8000
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
+# ✅ Correction ici : syntaxe shell pour expansion variable $PORT
+CMD php artisan serve --host=0.0.0.0 --port=$PORT
